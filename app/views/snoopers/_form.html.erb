@@ -1,0 +1,17 @@
+<%= form_with(model: snooper, local: true) do |form| %>
+  <% if snooper.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(snooper.errors.count, "error") %> prohibited this snooper from being saved:</h2>
+
+      <ul>
+      <% snooper.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

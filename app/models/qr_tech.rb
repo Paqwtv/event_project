@@ -1,0 +1,2 @@
+class QrTech < ApplicationRecord
+end
