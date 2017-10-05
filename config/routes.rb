@@ -1,8 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
-  resources :users do
-    resource :profiles
-  end
+  resources :users
+  resource :profiles
 
   resources :chat_rooms
   resources :categories
