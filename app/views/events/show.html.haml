@@ -1,0 +1,22 @@
+%p#notice= notice
+%p
+  %strong Author:
+  = @event.author
+%p
+  %strong Title:
+  = @event.title
+%p
+  %strong Description:
+  = @event.description
+%p
+  %strong Date time:
+  = @event.date_time
+%p
+  %strong Geotag:
+  = @event.geotag
+%p
+  %strong Acsess level:
+  = @event.acsess_level
+= link_to 'Edit', edit_event_path(@event)
+|
+= link_to 'Back', events_path

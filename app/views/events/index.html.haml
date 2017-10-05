@@ -1,0 +1,40 @@
+%p#notice= notice
+%h1 Events
+%table
+  %thead
+    %tr
+      %th Author
+      %th Title
+      %th Description
+      %th Date time
+      %th Geotag
+      %th Acsess level
+      %th{:colspan => "3"}
+  %tbody
+  .devise
+    - if user_signed_in?
+      %span Здравствуйте,
+      = current_user.email
+      = link_to 'Выйти', destroy_user_session_path, method: :delete, data: { confirm: 'Вы точно хотите выйти?' }
+    - else
+      = link_to 'Войти', new_user_session_path 
+      %span или
+      = link_to 'Зарегистрироваться', new_user_registration_path
+
+      - @events.each do |event|
+        %tr
+          %td= event.author
+          %td= event.title
+          %td= event.description
+          %td= event.date_time
+          %td= event.geotag
+          %td= event.acsess_level
+          %td= link_to 'Show', event
+          %td= link_to 'Edit', edit_event_path(event)
+          %td= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' }
+%br/
+= link_to 'New Event', new_event_path
+.block
+- unless user.nil?
+  = link_to 'Profile', url_for([ @user, @profile])
+

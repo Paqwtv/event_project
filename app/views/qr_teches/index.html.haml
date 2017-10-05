@@ -1,0 +1,14 @@
+%p#notice= notice
+%h1 Qr Teches
+%table
+  %thead
+    %tr
+      %th{:colspan => "3"}
+  %tbody
+    - @qr_teches.each do |qr_tech|
+      %tr
+        %td= link_to 'Show', qr_tech
+        %td= link_to 'Edit', edit_qr_tech_path(qr_tech)
+        %td= link_to 'Destroy', qr_tech, method: :delete, data: { confirm: 'Are you sure?' }
+%br/
+= link_to 'New Qr Tech', new_qr_tech_path

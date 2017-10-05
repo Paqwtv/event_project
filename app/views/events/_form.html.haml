@@ -1,0 +1,37 @@
+= form_with(model: event, local: true) do |form|
+  - if event.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(event.errors.count, "error")
+        prohibited this event from being saved:
+      %ul
+        - event.errors.full_messages.each do |message|
+          %li= message
+  .field
+    = form.label :author
+    = form.text_field :author, id: :event_author
+  .field
+    = form.label :title
+    = form.text_field :title, id: :event_title
+  .field
+    = form.label :description
+    = form.text_field :description, id: :event_description
+  .field
+    = form.label :date_time
+    = form.text_field :date_time, id: :event_date_time
+  .field
+    = form.label :geotag
+    = form.text_field :geotag, id: :event_geotag
+  .field
+    = form.radio_button(:private, 'false')
+    = form.label(:private_false, 'Tis is public event')
+    = form.radio_button(:private, 'true')
+    = form.label(:private_true, 'Tis is private event')
+  .field
+    = contacts
+  .field
+    = checked_by_as
+  .field
+    = checked_by_as
+  .actions
+    = form.submit
