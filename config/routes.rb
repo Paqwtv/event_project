@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
   resources :users
-  resource :profiles
+  resources :profiles
 
   resources :chat_rooms
   resources :categories
@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   resources :events
   
 
-  #get 'profiles/new', as: 'user_root'
+  #get 'profiles/edit', as: 'user_root'
 
   # For details on the DSL available within this file, see nrails.org/routing.html
   root to: "events#index"

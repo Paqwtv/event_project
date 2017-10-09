@@ -40,6 +40,8 @@ group :development, :test do
   gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
   gem 'rspec'
+  gem 'rspec-rails', '~> 3.5'
+  gem 'factory_girl_rails', '~> 4.0'
 end
 
 group :development do
@@ -59,3 +61,7 @@ gem 'devise'
 gem 'haml'
 
 gem "haml-rails", "~> 1.0"
+
+gem "geocoder"
+
+gem 'gmaps4rails'

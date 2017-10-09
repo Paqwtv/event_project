@@ -6,11 +6,22 @@ class EventsController < ApplicationController
   # GET /events.json
   def index
     @events = Event.all
+    @hash = Gmaps4rails.build_markers(@events) do |event, marker|
+      marker.lat event.latitude
+      marker.lng event.longitude
+      marker.infowindow event.title
+    end
   end
 
   # GET /events/1
   # GET /events/1.json
   def show
+    set_event
+    @hash = Gmaps4rails.build_markers(@event) do |event, marker|
+      marker.lat event.latitude
+      marker.lng event.longitude
+      marker.infowindow event.title
+    end
   end
 
   # GET /events/new
@@ -26,16 +37,13 @@ class EventsController < ApplicationController
   # POST /events.json
   def create
     @event = Event.new(event_params)
+    @event.profile_id = current_user.profile.id
+    @event.save
 
-    respond_to do |format|
-      if @event.save
-        format.html { redirect_to @event, notice: 'Event was successfully created.' }
-        format.json { render :show, status: :created, location: @event }
-      else
-        format.html { render :new }
-        format.json { render json: @event.errors, status: :unprocessable_entity }
-      end
+    if @event.save
+      redirect_to @event, notice: 'Event was successfully created.'
     end
+    
   end
 
   # PATCH/PUT /events/1
@@ -70,6 +78,6 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:author, :title, :description, :date_time, :geotag, :acsess_level)
+      params.require(:event).permit(:author, :title, :description, :date_time, :latitude, :longitude, :acsess_level)
     end
 end

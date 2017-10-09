@@ -20,18 +20,18 @@
     = form.label :date_time
     = form.text_field :date_time, id: :event_date_time
   .field
-    = form.label :geotag
-    = form.text_field :geotag, id: :event_geotag
+    = form.label :latitude
+    = form.text_field :latitude, id: :event_latitude  
+  .field
+    = form.label :longitude
+    = form.text_field :longitude, id: :event_longitude
   .field
     = form.radio_button(:private, 'false')
-    = form.label(:private_false, 'Tis is public event')
+    = form.label(:private_false, 'Public event')
     = form.radio_button(:private, 'true')
-    = form.label(:private_true, 'Tis is private event')
+    = form.label(:private_true, 'Private event')
   .field
-    = contacts
-  .field
-    = checked_by_as
-  .field
-    = checked_by_as
+    = form.label :contacts
+    = form.text_field :contacts, id: :event_contacts
   .actions
     = form.submit

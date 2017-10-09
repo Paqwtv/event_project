@@ -17,7 +17,7 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create event" do
     assert_difference('Event.count') do
-      post events_url, params: { event: { acsess_level: @event.acsess_level, author: @event.author, date_time: @event.date_time, description: @event.description, geotag: @event.geotag, title: @event.title } }
+      post events_url, params: { event: { acsess_level: @event.acsess_level, author: @event.author, date_time: @event.date_time, description: @event.description, latitude: @event.latitude, longitude: @event.longitude, title: @event.title } }
     end
 
     assert_redirected_to event_url(Event.last)
@@ -34,7 +34,7 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update event" do
-    patch event_url(@event), params: { event: { acsess_level: @event.acsess_level, author: @event.author, date_time: @event.date_time, description: @event.description, geotag: @event.geotag, title: @event.title } }
+    patch event_url(@event), params: { event: { acsess_level: @event.acsess_level, author: @event.author, date_time: @event.date_time, description: @event.description, latitude: @event.latitude, longitude: @event.longitude, title: @event.title } }
     assert_redirected_to event_url(@event)
   end
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171001084011) do
+ActiveRecord::Schema.define(version: 20170930194259) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -72,13 +72,14 @@ ActiveRecord::Schema.define(version: 20171001084011) do
     t.string "title"
     t.string "description"
     t.string "date_time"
-    t.string "geotag"
-    t.boolean "private", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.float "latitude"
+    t.float "longitude"
+    t.boolean "private", default: false, null: false
     t.string "contacts"
     t.integer "checked_by_as", limit: 2
     t.string "secret_key"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["profile_id"], name: "index_events_on_profile_id"
   end
 
@@ -94,7 +95,7 @@ ActiveRecord::Schema.define(version: 20171001084011) do
   create_table "profiles", force: :cascade do |t|
     t.bigint "user_id"
     t.string "user_name"
-    t.string "sex"
+    t.string "gender"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_profiles_on_user_id"
@@ -116,7 +117,6 @@ ActiveRecord::Schema.define(version: 20171001084011) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "email", default: "", null: false

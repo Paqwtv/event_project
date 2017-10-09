@@ -6,8 +6,12 @@ class CreateEvents < ActiveRecord::Migration[5.1]
       t.string :title
       t.string :description
       t.string :date_time
-      t.string :geotag
-      t.string :acsess_level
+      t.float :latitude
+      t.float :longitude
+      t.boolean :private, null: false, default: false
+      t.string :contacts
+      t.integer :checked_by_as, limit: 2
+      t.string :secret_key
 
       t.timestamps
     end

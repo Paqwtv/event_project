@@ -1,5 +1,5 @@
 class Profile < ApplicationRecord
-	belongs_to :user
+	belongs_to :user, optional: true
 	has_many :events
 	has_many :invites
 	has_many :check_ins
