@@ -1,9 +1,26 @@
 class ProfilesController < ApplicationController
+ # before_action :authenticate_user!
   before_action :set_profile, only: [:show, :edit, :update]
 
   # GET /profiles/1
   # GET /profiles/1.json
   def show
+    if user_signed_in?
+      puts "вошел"
+      get_profile = Profile.find(params[:id])
+      puts get_profile.id
+      @profile = Profile.find(current_user.profile.id)
+      puts @profile.id
+      if get_profile.id == @profile.id
+        @profile
+      else
+        puts "нет доступа"
+        render :status => 404
+      end
+    else
+      puts "Необходимо войти"
+      render :status => 404
+    end
   end
 
   def index
@@ -38,6 +55,6 @@ class ProfilesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def profile_params
-      params.require(:profile).permit(:user_name, :gender, :id )
+      params.require(:profile).permit(:user_name, :gender)
     end
 end

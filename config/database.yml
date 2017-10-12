@@ -25,13 +25,8 @@ default: &default
   host: localhost
 
 development:
-  adapter: postgresql
-  encoding: unicode
-  host: localhost
+  <<: *default
   database: event_project_development
-  pool: 5
-  username: madmax
-  password: madmaxdx
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -89,5 +84,4 @@ test:
 production:
   <<: *default
   database: event_project_production
-  username: event_project
   password: <%= ENV['EVENT_PROJECT_DATABASE_PASSWORD'] %>

@@ -6,22 +6,13 @@ class EventsController < ApplicationController
   # GET /events.json
   def index
     @events = Event.all
-    @hash = Gmaps4rails.build_markers(@events) do |event, marker|
-      marker.lat event.latitude
-      marker.lng event.longitude
-      marker.infowindow event.title
-    end
+    create_map(@events)
   end
 
   # GET /events/1
   # GET /events/1.json
   def show
-    set_event
-    @hash = Gmaps4rails.build_markers(@event) do |event, marker|
-      marker.lat event.latitude
-      marker.lng event.longitude
-      marker.infowindow event.title
-    end
+    create_map(@event)
   end
 
   # GET /events/new
@@ -71,6 +62,13 @@ class EventsController < ApplicationController
   end
 
   private
+    def create_map event
+      @hash = Gmaps4rails.build_markers(event) do |event, marker|
+      marker.lat event.latitude
+      marker.lng event.longitude
+      marker.infowindow event.title
+      end
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_event
       @event = Event.find(params[:id])
