@@ -1,25 +1,17 @@
 class ProfilesController < ApplicationController
- # before_action :authenticate_user!
+  before_action :authenticate_user!
   before_action :set_profile, only: [:show, :edit, :update]
 
   # GET /profiles/1
   # GET /profiles/1.json
   def show
-    if user_signed_in?
-      puts "вошел"
-      get_profile = Profile.find(params[:id])
-      puts get_profile.id
-      @profile = Profile.find(current_user.profile.id)
-      puts @profile.id
-      if get_profile.id == @profile.id
-        @profile
-      else
-        puts "нет доступа"
-        render :status => 404
-      end
+    cur_user_prof = !current_user.nil? ? current_user.profile : nil 
+    if cur_user_prof.id != @profile.id
+      puts "нет доступа"
+      # raise ActionController::RoutingError.new('Not Found')
+      render :file => "#{Rails.root}/public/404.html",  :status => 404
     else
-      puts "Необходимо войти"
-      render :status => 404
+      render
     end
   end
 
