@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :update, :destroy]
-    before_action :set_event, only: [:show, :edit, :update, :destroy]
+  before_action :set_event, only: [:show, :edit, :update, :destroy]
 
   # GET /events
   # GET /events.json
@@ -27,14 +27,14 @@ class EventsController < ApplicationController
   # POST /events
   # POST /events.json
   def create
-    @event = Event.new(event_params)
-    @event.profile_id = current_user.profile.id
+    @event = Event.new(event_params.merge(profile_id: current_user.profile.id))
     @event.save
 
     if @event.save
       redirect_to @event, notice: 'Event was successfully created.'
+    else
+      render :edit
     end
-    
   end
 
   # PATCH/PUT /events/1
@@ -64,9 +64,9 @@ class EventsController < ApplicationController
   private
     def create_map event
       @hash = Gmaps4rails.build_markers(event) do |event, marker|
-      marker.lat event.latitude
-      marker.lng event.longitude
-      marker.infowindow event.title
+        marker.lat event.latitude
+        marker.lng event.longitude
+        marker.infowindow event.title
       end
     end
     # Use callbacks to share common setup or constraints between actions.

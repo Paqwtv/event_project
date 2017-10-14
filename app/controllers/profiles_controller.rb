@@ -7,11 +7,8 @@ class ProfilesController < ApplicationController
   def show
     cur_user_prof = !current_user.nil? ? current_user.profile : nil 
     if cur_user_prof.id != @profile.id
-      puts "нет доступа"
-      # raise ActionController::RoutingError.new('Not Found')
       render :file => "#{Rails.root}/public/404.html",  :status => 404
-    else
-      render
+      return
     end
   end
 
