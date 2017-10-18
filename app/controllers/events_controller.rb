@@ -28,6 +28,10 @@ class EventsController < ApplicationController
   # POST /events.json
   def create
     @event = Event.new(event_params.merge(profile_id: current_user.profile.id))
+    @event.author = current_user.profile.user_name
+    # @category = Category.find(params[:id])
+    # puts '>>>>', @category
+    #@event.categories << @category
     @event.save
 
     if @event.save
@@ -40,14 +44,10 @@ class EventsController < ApplicationController
   # PATCH/PUT /events/1
   # PATCH/PUT /events/1.json
   def update
-    respond_to do |format|
-      if @event.update(event_params)
-        format.html { redirect_to @event, notice: 'Event was successfully updated.' }
-        format.json { render :show, status: :ok, location: @event }
-      else
-        format.html { render :edit }
-        format.json { render json: @event.errors, status: :unprocessable_entity }
-      end
+    if @event.update(event_params)
+      redirect_to @event, notice: 'Event was successfully updated.'
+    else
+      render :edit
     end
   end
 
@@ -76,6 +76,6 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:author, :title, :description, :date_time, :latitude, :longitude, :acsess_level)
+      params.require(:event).permit(:author, :title, :description, :date_time, :latitude, :longitude, :private, :contacts, :category_ids => [])
     end
 end

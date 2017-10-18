@@ -5,9 +5,9 @@ class ProfilesController < ApplicationController
   # GET /profiles/1
   # GET /profiles/1.json
   def show
-    cur_user_prof = !current_user.nil? ? current_user.profile : nil 
+    cur_user_prof = !current_user.nil? ? current_user.profile : nil
     if cur_user_prof.id != @profile.id
-      render :file => "#{Rails.root}/public/404.html",  :status => 404
+      render :file => "#{Rails.root}/public/404.html", :status => 404
       return
     end
   end

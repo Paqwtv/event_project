@@ -8,30 +8,37 @@
         - event.errors.full_messages.each do |message|
           %li= message
   .field
-    = form.label :author
-    = form.text_field :author, id: :event_author
-  .field
-    = form.label :title
+    = form.label :title, "Название"
     = form.text_field :title, id: :event_title
   .field
-    = form.label :description
+    = form.label :description, "Описание"
     = form.text_field :description, id: :event_description
   .field
-    = form.label :date_time
+    = form.label :date_time, "Дата мероприятия"
     = form.text_field :date_time, id: :event_date_time
   .field
-    = form.label :latitude
+    = form.label :latitude, "Широта"
     = form.text_field :latitude, id: :event_latitude  
   .field
-    = form.label :longitude
+    = form.label :longitude, "Долгота"
     = form.text_field :longitude, id: :event_longitude
   .field
     = form.radio_button(:private, 'false')
-    = form.label(:private_false, 'Public event')
+    = form.label(:private_false, 'Публичное мероприятие')
     = form.radio_button(:private, 'true')
-    = form.label(:private_true, 'Private event')
+    = form.label(:private_true, 'Приватное мероприятие')
   .field
-    = form.label :contacts
+    = form.label :contacts, "Контакты"
     = form.text_field :contacts, id: :event_contacts
+  .field
+    / = form.inputs :categories, :as => :checkboxes
+    / - Category.all.each do |category|
+    /   = form.options_for_select([category[:name],category[:id]])
+    = form.select :category_ids, options_for_select(Category.all.map {|category| [category.name, category.id]}, @event.category_ids), {}, :multiple => true
+    / = form.options_for_select(:category_id) 
+    /  'event[category_id]', category.name 
+    / 'event[category_id]', category.name
+    / = category.name
+    / = form.options_for_select(:category_id)
   .actions
     = form.submit

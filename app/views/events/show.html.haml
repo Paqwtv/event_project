@@ -1,6 +1,3 @@
-<script src="//maps.google.com/maps/api/js?key=AIzaSyBWIZdVc2TCRJ7bnJRzNrRbSGDynUPzpA4"></script>
-<script src="//cdn.rawgit.com/mahnunchik/markerclustererplus/master/dist/markerclusterer.min.js"></script>
-<script src='//cdn.rawgit.com/printercu/google-maps-utility-library-v3-read-only/master/infobox/src/infobox_packed.js' type='text/javascript'></script> <!-- only if you need custom infoboxes -->
 %p#notice= notice
 %p
   %strong Author:
@@ -23,16 +20,19 @@
 %p
   %strong Private:
   = @event.private
-= link_to 'Edit', edit_event_path(@event)
-|
-= link_to 'Back', events_path
+%p
+  %strong Категории:
+  - @event.categories.each do |category|
+    = category.name
+
+= link_to ('<i class="material-icons">edit</i>').html_safe, edit_event_path(@event)
+
 .map{style: 'width: 800px;'}
   #map{style: 'width: 800px; height: 400px;'}
   :javascript   
     handler = Gmaps.build('Google');
-    handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+    handler.buildMap({ provider: {maxZoom: 12}, internal: {id: 'map'}}, function(){
       markers = handler.addMarkers(#{raw @hash.to_json});
       handler.bounds.extendWith(markers);
       handler.fitMapToBounds();
     });
-

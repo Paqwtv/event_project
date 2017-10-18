@@ -66,3 +66,5 @@ gem "haml-rails", "~> 1.0"
 gem "geocoder"
 
 gem 'gmaps4rails'
+
+gem 'material_design_lite-rails', '~> 1.3'

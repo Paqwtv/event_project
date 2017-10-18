@@ -6,15 +6,26 @@
     = csrf_meta_tags
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag '//maps.google.com/maps/api/js?key=AIzaSyBWIZdVc2TCRJ7bnJRzNrRbSGDynUPzpA4'
+    = javascript_include_tag "//cdn.rawgit.com/mahnunchik/markerclustererplus/master/dist/markerclusterer.min.js"
+    = stylesheet_link_tag "https://fonts.googleapis.com/icon?family=Material+Icons"
   %body
     %p#notice= notice
     .devise
     - if user_signed_in?
       %span Здравствуйте,
       = current_user.profile.user_name
-      = link_to 'Выйти', destroy_user_session_path, method: :delete, data: { confirm: 'Вы точно  хотите    выйти?' }    
+      = link_to 'Выйти', destroy_user_session_path, method: :delete, data: { confirm: 'Вы точно хотите выйти?' }
     - else    
-      = link_to 'Войти', new_user_session_path     
+      = link_to 'Войти', new_user_session_path
       %span или
       = link_to 'Зарегистрироваться', new_user_registration_path
+
+    .block_panel
+      %tr= link_to 'Главная', root_path
+      %tr= link_to 'Профиль', profile_path(current_user.profile.id) if user_signed_in?
+      %tr= link_to 'Категории', categories_path
+      %tr= link_to 'Чаты', chat_rooms_path
+      %tr= link_to 'QR code', qr_teches_path
+      %tr= link_to 'Ищейка', snoopers_path
     = yield
