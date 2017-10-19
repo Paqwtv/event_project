@@ -2,23 +2,11 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-# namespace 'Event.MapBuilder', (exports) ->
-# 	handler = Gmaps.build('Google');
-#   handler.buildMap({ provider: { maxZoom: 12 }, internal: {id: 'map'}}, function(){
-#     markers = handler.addMarkers(#{raw @hash.to_json});
-#     handler.bounds.extendWith(markers);
-#     handler.fitMapToBounds();
-#   });
+namespace 'Event.MapBuilder', (exports) ->
 
-
-# 	exports.init = () ->
-#     console.log("we are here");
-
-# class MyClass
-# 	myFunc: () ->
-# 		handler = Gmaps.build('Google');
-# 	  handler.buildMap({ provider: { maxZoom: 12 }, internal: {id: 'map'}}, function(){
-# 	    markers = handler.addMarkers(#{raw @hash.to_json});
-# 	    handler.bounds.extendWith(markers);
-# 	    handler.fitMapToBounds();
-# 	  });
+  exports.init = (s_markers)->
+    handler = Gmaps.build('Google')
+    handler.buildMap {provider: { maxZoom: 12 }, internal: {id: 'map'}}, ->
+      markers = handler.addMarkers(s_markers)
+      handler.bounds.extendWith(markers)
+      handler.fitMapToBounds()

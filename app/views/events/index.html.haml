@@ -28,9 +28,4 @@
 #map{style: 'width: 600px; height: 300px;'}
 
 :javascript
-  handler = Gmaps.build('Google');
-  handler.buildMap({ provider: { maxZoom: 12 }, internal: {id: 'map'}}, function(){
-    markers = handler.addMarkers(#{raw @hash.to_json});
-    handler.bounds.extendWith(markers);
-    handler.fitMapToBounds();
-  });
+  Event.MapBuilder.init(#{raw @hash.to_json});
