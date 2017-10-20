@@ -68,5 +68,3 @@ gem "geocoder"
 gem 'gmaps4rails'
 
 gem 'material_design_lite-rails', '~> 1.3'
-
-gem 'bourbon'

@@ -9,4 +9,6 @@ class Event < ApplicationRecord
 	belongs_to :qr_checkin, class_name: 'QrTech', foreign_key: 'qr_checkin_id',  optional: true
 	geocoded_by :contacts
 	after_validation :geocode
+  scope :search, lambda {|query| where('title LIKE ?', "%#{query}%")}
+
 end

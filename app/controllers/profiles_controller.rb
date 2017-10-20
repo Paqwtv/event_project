@@ -19,6 +19,7 @@ class ProfilesController < ApplicationController
 
   # GET /profiles/1/edit
   def edit
+    @categories = Category.all
   end
 
 
@@ -44,6 +45,6 @@ class ProfilesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def profile_params
-      params.require(:profile).permit(:user_name, :gender)
+      params.require(:profile).permit(:user_name, :gender, :category_ids => [])
     end
 end

@@ -31,14 +31,6 @@
     = form.label :contacts, "Контакты"
     = form.text_field :contacts, id: :event_contacts
   .field
-    / = form.inputs :categories, :as => :checkboxes
-    / - Category.all.each do |category|
-    /   = form.options_for_select([category[:name],category[:id]])
     = form.select :category_ids, options_for_select(Category.all.map {|category| [category.name, category.id]}, @event.category_ids), {}, :multiple => true
-    / = form.options_for_select(:category_id) 
-    /  'event[category_id]', category.name 
-    / 'event[category_id]', category.name
-    / = category.name
-    / = form.options_for_select(:category_id)
   .actions
     = form.submit

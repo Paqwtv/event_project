@@ -6,6 +6,9 @@ class EventsController < ApplicationController
   # GET /events.json
   def index
     @events = Event.all
+    if params[:search]
+      @events = @events.search(params[:search])
+    end
     create_map(@events)
   end
 
@@ -62,8 +65,9 @@ class EventsController < ApplicationController
   end
 
   private
-    def create_map event
-      @hash = Gmaps4rails.build_markers(event) do |event, marker|
+
+    def create_map events
+      @hash = Gmaps4rails.build_markers(events) do |event, marker|
         marker.lat event.latitude
         marker.lng event.longitude
         marker.infowindow event.title
