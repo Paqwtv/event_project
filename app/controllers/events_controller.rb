@@ -72,6 +72,15 @@ class EventsController < ApplicationController
         marker.lng event.longitude
         marker.infowindow event.title
       end
+      append_cur_location
+    end
+
+    def append_cur_location
+      @hash << { :lat=>action[0], :lng=>action[1]}      
+    end
+
+    def action
+      @lat_lng = cookies[:lat_lng].split("|")
     end
     # Use callbacks to share common setup or constraints between actions.
     def set_event
