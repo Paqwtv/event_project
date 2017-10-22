@@ -16,38 +16,16 @@
     %tr= "Поле"
     %tr= "Поле"
   %main.mdl-layout__content
-    %section#fixed-tab-1.mdl-layout__tab-panel.is-active
-      .page-content
-        %h2 Все события        
-        .materialContainer
-          %table
-            %thead
-              %tr
-                %th Создатель
-                %th Название
-                %th Описание
-                %th Дата события
-                %th Широта
-                %th Долгота
-                %th{:colspan => "3"}
-            %tbody
-              - @events.each do |event|
-                %tr
-                  %td= event.author
-                  %td= link_to "#{event.title}", event
-                  %td= event.description
-                  %td= event.date_time
-                  %td= event.latitude
-                  %td= event.longitude
-                  %td= link_to ('<i class="material-icons">edit</i>').html_safe, edit_event_path(event)
-                  %td= link_to ('<i class="material-icons">delete</i>').html_safe, event, method: :delete, data: { confirm: 'Are you sure?' }
-                  %br/
-        -if user_signed_in?
-          = link_to 'Новое событие', new_event_path
+    = render 'list', locals: {events: @events}
+
     %section#fixed-tab-2.mdl-layout__tab-panel
       .page-content
         / Your content goes here
       #map{style: 'width: 800px; height: 500px;'}
 
       :javascript
-        Event.MapBuilder.init(#{raw @hash.to_json});
+        map = Event.MapBuilder.init(#{raw @hash.to_json});
+        map;
+
+/ :javascript
+/   MapHandler.init(map)

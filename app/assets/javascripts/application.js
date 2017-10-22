@@ -11,6 +11,8 @@
 // about supported directives.
 //
 //= require tools/namespace
+//= require jquery
+//= require jquery_ujs
 //= require rails-ujs
 //= require turbolinks
 //= require underscore

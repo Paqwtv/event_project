@@ -6,10 +6,15 @@ class EventsController < ApplicationController
   # GET /events.json
   def index
     @events = Event.all
+
     if params[:search]
       @events = @events.search(params[:search])
     end
     create_map(@events)
+    respond_to do |format|
+      format.html
+      format.json { render json: @events }#render 'dashbord', events: @events}
+    end
   end
 
   # GET /events/1
@@ -38,7 +43,10 @@ class EventsController < ApplicationController
     @event.save
 
     if @event.save
-      redirect_to @event, notice: 'Event was successfully created.'
+      respond_to do |format|
+        format.html {redirect_to @event, notice: 'Event was successfully created.'}
+        format.json {render text: 'Yee!'}
+      end
     else
       render :edit
     end
@@ -48,7 +56,10 @@ class EventsController < ApplicationController
   # PATCH/PUT /events/1.json
   def update
     if @event.update(event_params)
-      redirect_to @event, notice: 'Event was successfully updated.'
+      respond_to do |format|
+        format.html { redirect_to @event, notice: 'Event was successfully updated.'}
+        format.json { render json: {a: 'Yee!'}}
+      end
     else
       render :edit
     end
@@ -76,12 +87,11 @@ class EventsController < ApplicationController
     end
 
     def append_cur_location
-      @hash << { :lat=>action[0], :lng=>action[1]}      
+      unless @lat_lng.blank?
+        @hash << { :lat=>@lat_lng[0], :lng=>@lat_lng[1]}
+      end   
     end
 
-    def action
-      @lat_lng = cookies[:lat_lng].split("|")
-    end
     # Use callbacks to share common setup or constraints between actions.
     def set_event
       @event = Event.find(params[:id])

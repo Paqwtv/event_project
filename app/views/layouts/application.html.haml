@@ -53,3 +53,6 @@
     %tr= link_to 'QR code', qr_teches_path
     %tr= link_to 'Ищейка', snoopers_path
   = yield
+
+:javascript
+  Get.GeoLocation.init();
