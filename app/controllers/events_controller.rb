@@ -5,13 +5,16 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
+    
     @page = params[:page] ? params[:page] : 1
+    puts @page
     if params[:filter]
       #init Filter Object 
       @filter = EventsFilter.new(params[:filter], @page)
       @enents = @filter.records
     else
-      @events = Event.page(@page)
+      @events = Event.paginate(:page => params[:page], per_page: 3)
+      # @events = Event.page(@page)
     end
     create_map(@events)
     respond_to do |format|
@@ -28,7 +31,11 @@ class EventsController < ApplicationController
 
   # GET /events/new
   def new
-    @event = Event.new
+    if current_user.profile.user_name.blank?
+      redirect_to edit_profile_path(current_user.id), notice: 'Заполните ваш профиль перед созданием нового EVENT.'
+    else
+      @event = Event.new
+    end
   end
 
   # GET /events/1/edit

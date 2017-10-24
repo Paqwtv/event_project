@@ -10,9 +10,14 @@
   .mdl-layout__drawer
     %span.mdl-layout-title Фильтр
     = render "search"
-    = select_date Date.today, prefix: :start_date
+    = fields_for 'event[filter]' do |f|
+    = collection_check_boxes(:event, :categiry_ids, Category.first(5), :id, :name)
+    / = f.label(:category_ids)
+    / = f.check_box(:category_ids)
+
   %main.mdl-layout__content
     = render 'list', locals: {events: @events}
+    = will_paginate @events
 
     %section#fixed-tab-2.mdl-layout__tab-panel
       .page-content
@@ -22,6 +27,7 @@
       :javascript
         map = Event.MapBuilder.init(#{raw @hash.to_json});
         map;
+
 
 / :javascript
 /   MapHandler.init(map)

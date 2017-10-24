@@ -1,34 +1,37 @@
-%p#notice= notice
-%p
-  %strong Author:
-  = @event.author
-%p
-  %strong Title:
-  = @event.title
-%p
-  %strong Description:
-  = @event.description
-%p
-  %strong Date time:
-  = @event.date_time
-%p
-  %strong Latitude:
-  = @event.latitude
-%p
-  %strong Longitude:
-  = @event.longitude
-%p
-  %strong Private:
-  = @event.private
-%p
-  %strong Категории:
-  - @event.categories.each do |category|
-    = category.name
+.mdl-grid
+  .mdl-cell.mdl-cell--8-col
 
-= link_to ('<i class="material-icons">edit</i>').html_safe, edit_event_path(@event)
+    %p#notice= notice
+    %p
+      %strong Author:
+      = @event.author
+    %p
+      %strong Title:
+      = @event.title
+    %p
+      %strong Description:
+      = @event.description
+    %p
+      %strong Date time:
+      = @event.date_time
+    %p
+      %strong Latitude:
+      = @event.latitude
+    %p
+      %strong Longitude:
+      = @event.longitude
+    %p
+      %strong Private:
+      = @event.private
+    %p
+      %strong Категории:
+      - @event.categories.each do |category|
+        = category.name
 
-.map{style: 'width: 800px;'}
-  #map{style: 'width: 800px; height: 400px;'}
+    = link_to ('<i class="material-icons">edit</i>').html_safe, edit_event_path(@event)
 
-  :javascript
-    Event.MapBuilder.init(#{raw @hash.to_json});
+    .map{style: 'width: 800px;'}
+      #map{style: 'width: 800px; height: 400px;'}
+
+      :javascript
+        Event.MapBuilder.init(#{raw @hash.to_json});

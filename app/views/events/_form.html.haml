@@ -1,39 +1,41 @@
-= form_with(model: event, local: true, id: "test") do |form|
-  - if event.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(event.errors.count, "error")
-        prohibited this event from being saved:
-      %ul
-        - event.errors.full_messages.each do |message|
-          %li= message
-  .field
-    = form.label :title, "Название"
-    = form.text_field :title, id: :event_title
-  .field
-    = form.label :description, "Описание"
-    = form.text_field :description, id: :event_description
-  .field
-    = form.label :date_time, "Дата мероприятия"
-    = form.text_field :date_time, id: :event_date_time
-  .field
-    = form.label :latitude, "Широта"
-    = form.text_field :latitude, id: :event_latitude  
-  .field
-    = form.label :longitude, "Долгота"
-    = form.text_field :longitude, id: :event_longitude
-  .field
-    = form.radio_button(:private, 'false')
-    = form.label(:private_false, 'Публичное мероприятие')
-    = form.radio_button(:private, 'true')
-    = form.label(:private_true, 'Приватное мероприятие')
-  .field
-    = form.label :contacts, "Контакты"
-    = form.text_field :contacts, id: :event_contacts
-  .field
-    = form.select :category_ids, options_for_select(Category.all.map {|category| [category.name, category.id]}, event.category_ids), {}, :multiple => true
-  .actions
-    = form.submit
+.mdl-textfield.mdl-js-textfield
+  = form_with(model: event, local: true, id: "test") do |form|
+    - if event.errors.any?
+      #error_explanation
+        %h2
+          = pluralize(event.errors.count, "error")
+          prohibited this event from being saved:
+        %ul
+          - event.errors.full_messages.each do |message|
+            %li= message
+
+    .field
+      = form.label :title, "Название", class: "mdl-textfield__label"
+      = form.text_field :title, id: :event_title, class: "mdl-textfield__input"
+    .field
+      = form.label :description, "Описание"
+      = form.text_field :description, id: :event_description
+    .field
+      = form.label :date_time, "Дата мероприятия"
+      = form.text_field :date_time, id: :event_date_time
+    .field
+      = form.label :latitude, "Широта"
+      = form.text_field :latitude, id: :event_latitude  
+    .field
+      = form.label :longitude, "Долгота"
+      = form.text_field :longitude, id: :event_longitude
+    .field
+      = form.radio_button(:private, 'false')
+      = form.label(:private_false, 'Публичное мероприятие')
+      = form.radio_button(:private, 'true')
+      = form.label(:private_true, 'Приватное мероприятие')
+    .field
+      = form.label :contacts, "Контакты"
+      = form.text_field :contacts, id: :event_contacts
+    .field
+      = form.select :category_ids, options_for_select(Category.all.map {|category| [category.name, category.id]}, event.category_ids), {}, :multiple => true
+    .actions
+      = form.submit
 
 :javascript
   FilterBehaviour.init("#test");
