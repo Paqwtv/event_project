@@ -2,19 +2,15 @@
   %header.mdl-layout__header
     .mdl-layout__header-row
       / =#%span.mdl-layout-title Фильтр
-      = render "search"
+      
     / Tabs
     .mdl-layout__tab-bar.mdl-js-ripple-effect
       %a.mdl-layout__tab.is-active{:href => "#fixed-tab-1"} Список
       %a.mdl-layout__tab{:href => "#fixed-tab-2"} Карта
   .mdl-layout__drawer
     %span.mdl-layout-title Фильтр
-    %tr= "Поле"
-    %tr= "Поле"
-    %tr= "Поле"
-    %tr= "Поле"
-    %tr= "Поле"
-    %tr= "Поле"
+    = render "search"
+    = select_date Date.today, prefix: :start_date
   %main.mdl-layout__content
     = render 'list', locals: {events: @events}
 

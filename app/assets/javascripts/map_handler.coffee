@@ -1,4 +1,4 @@
-namespace 'MapHandler', (exports) ->
+namespace 'FilterBehaviour', (exports) ->
   #filter behaviour
   get_all_filter_data = (form_id) ->
     data = {} 
@@ -19,7 +19,7 @@ namespace 'MapHandler', (exports) ->
         data: data,
         method: "GET",#"PATCH",
         url: "/events", #"/events/1.json"
-        #dataType: "json",
+        dataType: "json",
         success:  (data) ->
           console.log(data)
           alert("yeeee")

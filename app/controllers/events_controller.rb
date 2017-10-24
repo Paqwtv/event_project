@@ -5,15 +5,18 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    @events = Event.all
-
-    if params[:search]
-      @events = @events.search(params[:search])
+    @page = params[:page] ? params[:page] : 1
+    if params[:filter]
+      #init Filter Object 
+      @filter = EventsFilter.new(params[:filter], @page)
+      @enents = @filter.records
+    else
+      @events = Event.page(@page)
     end
     create_map(@events)
     respond_to do |format|
       format.html
-      format.json { render json: @events }#render 'dashbord', events: @events}
+      format.json { render 'list_path', locals: {events: @events } }#render 'dashbord', events: @events}
     end
   end
 

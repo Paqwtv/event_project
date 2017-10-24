@@ -6,7 +6,7 @@ namespace 'Event.MapBuilder', (exports) ->
 
   exports.init = (s_markers)->
     handler = Gmaps.build('Google')
-    handler.buildMap {provider: { maxZoom: 12 }, internal: {id: 'map'}}, ->
+    handler.buildMap {provider: { maxZoom: 18 }, internal: {id: 'map'}}, ->
       markers = handler.addMarkers(s_markers)
       handler.bounds.extendWith(markers)
       handler.fitMapToBounds()
