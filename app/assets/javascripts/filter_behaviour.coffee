@@ -1,4 +1,9 @@
 namespace 'FilterBehaviour', (exports) ->
+  #TODO REFACTORING
+  get_all_checkboxes = (class_name) ->
+    arr = []
+    $("input#{class_name}:checkbox:checked").each( () ->
+        arr.push($(this).val()) )
   #filter behaviour
   get_all_filter_data = (form_id) ->
     data = {} 
@@ -6,7 +11,11 @@ namespace 'FilterBehaviour', (exports) ->
     $(form_id).find( '[name]' ).each( ( i , v ) ->
       input = $( this )
       name = input.attr( 'name' )
-      value = input.val()
+      if input.attr('type') == 'checkbox'
+        value = get_all_checkboxes(imput.attr('class'))
+      else 
+        value = input.val()
+
       data[name] = value)
     return data
 

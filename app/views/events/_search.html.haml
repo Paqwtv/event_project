@@ -1,9 +1,7 @@
-= form_tag events_path, method: "get" do
-  .mdl-textfield.mdl-js-textfield.mdl-textfield--expandable.mdl-textfield--floating-label.mdl-textfield--align-right
-    %label.mdl-button.mdl-js-button.mdl-button--icon{:for => "fixed-header-drawer-exp"}
-      %i.material-icons search
-    .mdl-textfield__expandable-holder
-      = text_field_tag :search, params[:search], id: 'fixed-header-drawer-exp', class: "mdl-textfield__input"
-
-      / = collection_select :category_id, Category.all, :id, :name, include_blank: true
-      / = submit_tag "Поиск", name: nil 
+.mdl-textfield.mdl-js-textfield.mdl-textfield--expandable.mdl-textfield--floating-label.mdl-textfield--align-right
+  %label.mdl-button.mdl-js-button.mdl-button--icon{:for => "fixed-header-drawer-exp"}
+    %i.material-icons search
+  .mdl-textfield__expandable-holder
+    = text_field_tag "#{resourse}[query]", value, id: 'fixed-header-drawer-exp', class: "mdl-textfield__input"
+    / = collection_select :category_id, Category.all, :id, :name, include_blank: true
+    / = submit_tag "Поиск", name: nil 

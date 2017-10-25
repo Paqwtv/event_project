@@ -5,17 +5,17 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    
+    puts "PARAMS", params
     @page = params[:page] ? params[:page] : 1
-    puts @page
+    @filter = EventsFilter.new(params[:filter])
+    puts "eee>>", @filter.params.inspect
     if params[:filter]
       #init Filter Object 
-      @filter = EventsFilter.new(params[:filter], @page)
-      @enents = @filter.records
+      @events = @filter.records
     else
-      @events = Event.paginate(:page => params[:page], per_page: 3)
-      # @events = Event.page(@page)
+      @events = Event.all
     end
+    @events = @events.paginate(:page => @page, per_page: Event.per_page)
     create_map(@events)
     respond_to do |format|
       format.html

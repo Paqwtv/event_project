@@ -9,11 +9,24 @@
       %a.mdl-layout__tab{:href => "#fixed-tab-2"} Карта
   .mdl-layout__drawer
     %span.mdl-layout-title Фильтр
-    = render "search"
-    = fields_for 'event[filter]' do |f|
-    = collection_check_boxes(:event, :categiry_ids, Category.first(5), :id, :name)
-    / = f.label(:category_ids)
-    / = f.check_box(:category_ids)
+    = @filter.params[:categories].inspect
+    = form_tag events_path, method: "get", id: "search_form" do
+      = render partial: "search", locals: {resourse: "filter", value: @filter.params[:query]}
+
+      .filter_options_container
+        %fieldset.filter_form_fieldset
+          - Category.all.each do |category|
+            %p.category_check
+              = check_box_tag 'filter[categories][]', category.id, @filter.has_category?(category.id.to_s), :id => "category-#{category.id}"
+              %label{:for => "category-#{category.id}"}= category.name
+        .filter_form_button
+          %p2
+            %input{:type => "submit", :value => "Filter", name: nil}
+
+
+      / = f.check_box "Categories"
+    / = collection_check_boxes(:event, :categiry_ids, Category.first(5), :id, :name)
+
 
   %main.mdl-layout__content
     = render 'list', locals: {events: @events}
@@ -29,5 +42,5 @@
         map;
 
 
-/ :javascript
-/   MapHandler.init(map)
+:javascript
+  FilterBehaviour.init("#search_form");
