@@ -9,8 +9,7 @@
             %th.mdl-data-table__cell--non-numeric Название
             %th.mdl-data-table__cell--non-numeric Описание
             %th.mdl-data-table__cell--non-numeric Дата события
-            %th.mdl-data-table__cell--non-numeric Широта
-            %th.mdl-data-table__cell--non-numeric Долгота
+            %th.mdl-data-table__cell--non-numeric Адрес
             %th.mdl-data-table__cell--non-numeric{:colspan => "3"}
         %tbody
           - @events.each do |event|
@@ -19,8 +18,7 @@
               %td.mdl-data-table__cell--non-numeric= link_to "#{event.title}", event
               %td.mdl-data-table__cell--non-numeric= event.description
               %td.mdl-data-table__cell--non-numeric= event.date_time
-              %td.mdl-data-table__cell--non-numeric= event.latitude
-              %td.mdl-data-table__cell--non-numeric= event.longitude
+              %td.mdl-data-table__cell--non-numeric= event.contacts
               %td.mdl-data-table__cell--non-numeric= link_to ('<i class="material-icons">edit</i>').html_safe, edit_event_path(event)
               %td.mdl-data-table__cell--non-numeric= link_to ('<i class="material-icons">delete</i>').html_safe, event, method: :delete, data: { confirm: 'Are you sure?' }
               

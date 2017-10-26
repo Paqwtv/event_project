@@ -1,0 +1,7 @@
+.filter_options_container
+  %fieldset.filter_form_fieldset
+    - Category.all.each do |category|
+      %label.category_check{:for => "category-#{category.id}"}
+        = check_box_tag 'filter[categories][]', category.id, @filter.has_category?(category.id.to_s), :id => "category-#{category.id}"
+        = category.name
+        

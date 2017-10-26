@@ -1,27 +1,18 @@
 .mdl-layout.mdl-js-layout.mdl-layout--fixed-header.mdl-layout--fixed-tabs
   %header.mdl-layout__header
-    .mdl-layout__header-row
-      / =#%span.mdl-layout-title Фильтр
-      
+    .mdl-layout__header-row      
     / Tabs
     .mdl-layout__tab-bar.mdl-js-ripple-effect
       %a.mdl-layout__tab.is-active{:href => "#fixed-tab-1"} Список
       %a.mdl-layout__tab{:href => "#fixed-tab-2"} Карта
   .mdl-layout__drawer
     %span.mdl-layout-title Фильтр
-    = @filter.params[:categories].inspect
     = form_tag events_path, method: "get", id: "search_form" do
       = render partial: "search", locals: {resourse: "filter", value: @filter.params[:query]}
-
-      .filter_options_container
-        %fieldset.filter_form_fieldset
-          - Category.all.each do |category|
-            %p.category_check
-              = check_box_tag 'filter[categories][]', category.id, @filter.has_category?(category.id.to_s), :id => "category-#{category.id}"
-              %label{:for => "category-#{category.id}"}= category.name
-        .filter_form_button
-          %p2
-            %input{:type => "submit", :value => "Filter", name: nil}
+      = render partial: "category_checkbox"
+      .filter_form_button
+        %p2
+          %input{:type => "submit", :value => "Filter", name: nil}
 
 
       / = f.check_box "Categories"

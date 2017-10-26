@@ -69,4 +69,6 @@ gem 'gmaps4rails'
 
 gem 'material_design_lite-rails', '~> 1.3'
 
+gem 'material_icons'
+
 gem 'will_paginate', '~> 3.1.0'

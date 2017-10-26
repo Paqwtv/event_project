@@ -7,6 +7,7 @@ class Event < ApplicationRecord
 	has_and_belongs_to_many :check_ins
 	belongs_to :qr_invite, class_name: 'QrTech', foreign_key: 'qr_invite_id',  optional: true
 	belongs_to :qr_checkin, class_name: 'QrTech', foreign_key: 'qr_checkin_id',  optional: true
+	
 	geocoded_by :contacts
 	after_validation :geocode
   scope :search, lambda {|query| where('title LIKE ?', "%#{query}%")}

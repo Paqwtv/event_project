@@ -2,13 +2,9 @@ class EventsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :update, :destroy]
   before_action :set_event, only: [:show, :edit, :update, :destroy]
 
-  # GET /events
-  # GET /events.json
   def index
-    puts "PARAMS", params
     @page = params[:page] ? params[:page] : 1
     @filter = EventsFilter.new(params[:filter])
-    puts "eee>>", @filter.params.inspect
     if params[:filter]
       #init Filter Object 
       @events = @filter.records
@@ -23,13 +19,10 @@ class EventsController < ApplicationController
     end
   end
 
-  # GET /events/1
-  # GET /events/1.json
   def show
     create_map(@event)
   end
 
-  # GET /events/new
   def new
     if current_user.profile.user_name.blank?
       redirect_to edit_profile_path(current_user.id), notice: 'Заполните ваш профиль перед созданием нового EVENT.'
@@ -38,20 +31,13 @@ class EventsController < ApplicationController
     end
   end
 
-  # GET /events/1/edit
   def edit
   end
 
-  # POST /events
-  # POST /events.json
   def create
     @event = Event.new(event_params.merge(profile_id: current_user.profile.id))
     @event.author = current_user.profile.user_name
-    # @category = Category.find(params[:id])
-    # puts '>>>>', @category
-    #@event.categories << @category
     @event.save
-
     if @event.save
       respond_to do |format|
         format.html {redirect_to @event, notice: 'Event was successfully created.'}
@@ -62,8 +48,6 @@ class EventsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /events/1
-  # PATCH/PUT /events/1.json
   def update
     if @event.update(event_params)
       respond_to do |format|
@@ -75,8 +59,6 @@ class EventsController < ApplicationController
     end
   end
 
-  # DELETE /events/1
-  # DELETE /events/1.json
   def destroy
     @event.destroy
     respond_to do |format|
