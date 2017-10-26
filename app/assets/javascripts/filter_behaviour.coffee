@@ -17,6 +17,7 @@ namespace 'FilterBehaviour', (exports) ->
         value = input.val()
 
       data[name] = value)
+    data["ajax"] = true
     return data
 
   make_link = (form_id) ->

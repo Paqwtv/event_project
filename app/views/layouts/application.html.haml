@@ -6,8 +6,7 @@
     = csrf_meta_tags
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
-    / = javascript_include_tag '/javascripts/google_maps_api.js'
-    / = javascript_include_tag '/javascripts/markerclusterer_min.js'
+    = javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=AIzaSyAIvB_rZxPifLuLn6d9_mGZilXNipDnCos&callback=Event.MapBuilder.init_map"
   %body
 
   %p#notice= notice

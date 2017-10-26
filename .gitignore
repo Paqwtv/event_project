@@ -7,6 +7,9 @@
 # Ignore bundler config.
 /.bundle
 
+# Ignore local database configs.
+/config/database.yml
+
 # Ignore all logfiles and tempfiles.
 /log/*
 /tmp/*
@@ -17,4 +20,4 @@
 /yarn-error.log
 
 .byebug_history
-/config/database.yml
+

@@ -12,15 +12,14 @@ class EventsController < ApplicationController
       @events = Event.all
     end
     @events = @events.paginate(:page => @page, per_page: Event.per_page)
-    create_map(@events)
-    respond_to do |format|
-      format.html
-      format.json { render 'list_path', locals: {events: @events } }#render 'dashbord', events: @events}
+    if params[:ajax]
+      render partial: "list.html", locals: {events: @events }
+    else
+      render
     end
   end
 
   def show
-    create_map(@event)
   end
 
   def new
@@ -68,15 +67,6 @@ class EventsController < ApplicationController
   end
 
   private
-
-    def create_map events
-      @hash = Gmaps4rails.build_markers(events) do |event, marker|
-        marker.lat event.latitude
-        marker.lng event.longitude
-        marker.infowindow event.title
-      end
-      append_cur_location
-    end
 
     def append_cur_location
       unless @lat_lng.blank?

@@ -3,10 +3,13 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 namespace 'Event.MapBuilder', (exports) ->
-
-  exports.init = (s_markers)->
-    handler = Gmaps.build('Google')
-    handler.buildMap {provider: { maxZoom: 18 }, internal: {id: 'map'}}, ->
-      markers = handler.addMarkers(s_markers)
-      handler.bounds.extendWith(markers)
-      handler.fitMapToBounds()
+  exports.init_map = () -> 
+    uluru = {lat: -25.363, lng: 131.044};
+    map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 4,
+      center: uluru
+    })
+     marker = new google.maps.Marker({
+       position: uluru,
+       map: map
+       })
