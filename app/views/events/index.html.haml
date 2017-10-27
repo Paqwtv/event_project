@@ -7,7 +7,7 @@
       %a.mdl-layout__tab{:href => "#fixed-tab-2"} Карта
   .mdl-layout__drawer
     %span.mdl-layout-title Фильтр
-    = form_tag events_path, method: "get", id: "search_form" do
+    = form_tag events_path, method: "get", remote: true, id: "search_form" do
       = render partial: "search", locals: {resourse: "filter", value: @filter.params[:query]}
       = render partial: "category_checkbox"
       .filter_form_button
@@ -29,8 +29,8 @@
       #map{style: 'width: 800px; height: 500px;'}
 
       :javascript
-        map = Event.MapBuilder.init(#{raw @hash.to_json});
-        map;
+        Event.MapBuilder.init_map();
+        
 
 
 :javascript

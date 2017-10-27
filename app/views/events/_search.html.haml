@@ -3,5 +3,3 @@
     %i.material-icons search
   .mdl-textfield__expandable-holder
     = text_field_tag "#{resourse}[query]", value, id: 'fixed-header-drawer-exp', class: "mdl-textfield__input"
-    / = collection_select :category_id, Category.all, :id, :name, include_blank: true
-    / = submit_tag "Поиск", name: nil 

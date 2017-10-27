@@ -4,12 +4,13 @@
 
 namespace 'Event.MapBuilder', (exports) ->
   exports.init_map = () -> 
-    uluru = {lat: -25.363, lng: 131.044};
-    map = new google.maps.Map(document.getElementById('map'), {
-      zoom: 4,
-      center: uluru
-    })
-     marker = new google.maps.Marker({
-       position: uluru,
-       map: map
-       })
+    uluru = {
+      lat: 48.464228
+      lng: 35.045755
+      }
+    map = new (google.maps.Map)(document.getElementById('map'),
+      zoom: 14
+      center: uluru)
+    marker = new (google.maps.Marker)(
+      position: uluru
+      map: map)

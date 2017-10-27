@@ -3,13 +3,15 @@ namespace 'FilterBehaviour', (exports) ->
   get_all_checkboxes = (class_name) ->
     arr = []
     $("input#{class_name}:checkbox:checked").each( () ->
-        arr.push($(this).val()) )
+      arr.push($(this).val()) )
   #filter behaviour
   get_all_filter_data = (form_id) ->
-    data = {} 
+    data = {}
+    console.log("AAAAAAAAAAA")
 
     $(form_id).find( '[name]' ).each( ( i , v ) ->
       input = $( this )
+      console.log(input)
       name = input.attr( 'name' )
       if input.attr('type') == 'checkbox'
         value = get_all_checkboxes(imput.attr('class'))
@@ -17,12 +19,12 @@ namespace 'FilterBehaviour', (exports) ->
         value = input.val()
 
       data[name] = value)
-    data["ajax"] = true
     return data
 
   make_link = (form_id) ->
     form = $(form_id)
     form.on( 'submit', (e) ->
+      console.log("on submit")
       data = get_all_filter_data(form_id)
       console.log(data)
       $.ajax({
@@ -36,8 +38,8 @@ namespace 'FilterBehaviour', (exports) ->
           $("#dashbord").html(data)
         })
       e.preventDefault()
+      return false
     )
-
 
 
   exports.init = (id) ->
